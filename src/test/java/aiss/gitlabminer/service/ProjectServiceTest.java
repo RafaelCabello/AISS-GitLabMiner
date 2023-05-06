@@ -20,6 +20,9 @@ class ProjectServiceTest {
     void findAllProjects() {
         List<ProjectSearch> projects = service.findAllProjects();
         assertTrue(!projects.isEmpty(), "No projects");
-        System.out.println(projects);
+        projects.forEach(p -> {
+            System.out.println(p);
+            System.out.println("************************************************************************************");
+        });
     }
 }

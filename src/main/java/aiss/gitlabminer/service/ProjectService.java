@@ -17,12 +17,6 @@ public class ProjectService {
 
     public List<ProjectSearch> findAllProjects() {
 
-        /*
-        String uri = "https://api.github.com/repos/spring-projects/spring-framework/commits";
-        Commit[] commits = template.getForObject(uri, Commit[].class);
-        return Arrays.stream(commits).toList();
-        */
-
         String uri = "https://gitlab.com/api/v4/projects";
         ProjectSearch[] projectSearch = restTemplate.getForObject(uri, ProjectSearch[].class);
         return Arrays.stream(projectSearch).toList();
