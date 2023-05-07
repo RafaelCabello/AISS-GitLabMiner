@@ -38,16 +38,14 @@ public class ProjectService {
         return projectSearch;
     }
 
-    //TODO: añadir restricciones sinceCommits, sinceIssues, maxPages
-
-    public Project getProject(Integer id) {
+    public Project getProject(Integer id, Integer maxPages) {
 
         String uri = "https://gitlab.com/api/v4/projects/" + id.toString();
         ProjectSearch projectSearch = restTemplate.getForObject(uri, ProjectSearch.class);
         Project project = new Project(projectSearch.getId().toString(), projectSearch.getName(), projectSearch.getWebUrl());
 
         //Add commits
-        List<CommitSearch> commitsSearch = commitService.findProjectCommits(project.getId());
+        List<CommitSearch> commitsSearch = commitService.findProjectCommits(project.getId(), maxPages);
         List<Commit> commits = new ArrayList<>();
         for (CommitSearch commitSearch: commitsSearch) {
             Commit newCommit = new Commit(
@@ -68,11 +66,12 @@ public class ProjectService {
 
         //Add issues
 
-        List<IssueSearch> issuesSearch = issueService.findByProjectId(project.getId());
+        List<IssueSearch> issuesSearch = issueService.findByProjectId(project.getId(), maxPages);
         List<Issue> issues = new ArrayList<>();
         for (IssueSearch issueSearch: issuesSearch) {
-            if (issueSearch.getClosedAt() == null){
-                issueSearch.setClosedAt("open");
+            String closed = null;
+            if (issueSearch.getClosedAt() != null){
+                closed = issueSearch.getClosedAt().toString();
             }
             Issue newIssue = new Issue(issueSearch.getId().toString(),
                     issueSearch.getIid().toString(),
@@ -81,7 +80,7 @@ public class ProjectService {
                     issueSearch.getState(),
                     issueSearch.getCreatedAt(),
                     issueSearch.getUpdatedAt(),
-                    issueSearch.getClosedAt().toString(),
+                    closed,
                     issueSearch.getLabels(),
                     issueSearch.getAuthor(),
                     issueSearch.getAssignee(),
@@ -89,7 +88,7 @@ public class ProjectService {
                     issueSearch.getDownvotes(),
                     issueSearch.getWebUrl());
             //Add comments
-            List<CommentSearch> commentsSearch = commentService.findByProjectIssue(project.getId(), newIssue.getRefId().toString());
+            List<CommentSearch> commentsSearch = commentService.findByProjectIssue(project.getId(), newIssue.getRefId().toString(), maxPages);
             List<Comment> comments = new ArrayList<>();
             for (CommentSearch commentSearch: commentsSearch) {
                 Comment newComment = new Comment(

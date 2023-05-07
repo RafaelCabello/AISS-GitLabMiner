@@ -35,7 +35,7 @@ public class CommentServiceTest {
     @Test
     @DisplayName("Get all comments of issue 127556169 (iid = 2395) of project 4207231")
     void findIssueComments() {
-        List<CommentSearch> comments = service.findByProjectIssue("4207231", "2395");
+        List<CommentSearch> comments = service.findByProjectIssue("4207231", "2395", 1);
         assertTrue(!comments.isEmpty(), "No comments");
         comments.forEach(c-> {
             System.out.println(c);

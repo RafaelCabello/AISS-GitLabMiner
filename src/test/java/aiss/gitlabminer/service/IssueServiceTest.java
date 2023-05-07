@@ -34,7 +34,7 @@ public class IssueServiceTest {
     @Test
     @DisplayName("Get all issues of project 4207231")
     void findProjectCommits() {
-        List<IssueSearch> issues = service.findByProjectId("4207231");
+        List<IssueSearch> issues = service.findByProjectId("4207231", 1);
         assertTrue(!issues.isEmpty(), "No issues");
         issues.forEach(c-> {
             System.out.println(c);

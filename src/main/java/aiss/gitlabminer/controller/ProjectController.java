@@ -33,8 +33,8 @@ public class ProjectController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{id}")
     public Project create(@PathVariable Integer id, @RequestParam(defaultValue = "2") Long sinceCommits
-            , @RequestParam(defaultValue = "20") Long sinceIssues) {
-        Project _project = projectService.getProject(id);
+            , @RequestParam(defaultValue = "20") Long sinceIssues, @RequestParam(defaultValue = "2") Integer maxPages) {
+        Project _project = projectService.getProject(id, maxPages);
         List<Commit> commits = _project.getCommits().stream()
                 .filter(c -> LocalDateTime.parse(c.getCommitted_date().substring(0,23)).isAfter(LocalDateTime.now().minusDays(sinceCommits))).toList();
         List<Issue> issues = _project.getIssues().stream()
@@ -54,8 +54,8 @@ public class ProjectController {
     //GET http://localhost:8081/gitlabminer/{id}
     @GetMapping("/{id}")
     public Project findProject(@PathVariable Integer id, @RequestParam(defaultValue = "2") Long sinceCommits
-    , @RequestParam(defaultValue = "20") Long sinceIssues) {
-        Project _project = projectService.getProject(id);
+    , @RequestParam(defaultValue = "20") Long sinceIssues, @RequestParam(defaultValue = "2") Integer maxPages) {
+        Project _project = projectService.getProject(id, maxPages);
         List<Commit> commits = _project.getCommits().stream()
                .filter(c -> LocalDateTime.parse(c.getCommitted_date().substring(0,23)).isAfter(LocalDateTime.now().minusDays(sinceCommits))).toList();
         List<Issue> issues = _project.getIssues().stream()

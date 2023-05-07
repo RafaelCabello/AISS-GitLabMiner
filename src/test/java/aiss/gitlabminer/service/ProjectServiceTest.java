@@ -40,7 +40,7 @@ class ProjectServiceTest {
     @Test
     @DisplayName("Get complete project with id = 4207231")
     void getProjectTest() {
-        Project project = service.getProject(4207231);
+        Project project = service.getProject(4207231, 1);
         System.out.println(project);
     }
 }
