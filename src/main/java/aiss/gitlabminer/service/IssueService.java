@@ -15,6 +15,8 @@ public class IssueService {
 
     @Autowired
     RestTemplate restTemplate;
+
+    /*
     @Autowired
     ProjectService service;
 
@@ -29,7 +31,9 @@ public class IssueService {
         return issues;
     }
 
-    public List<IssueSearch> findByProjectId(Integer id){
+     */
+
+    public List<IssueSearch> findByProjectId(String id){
         String uri = "https://gitlab.com/api/v4/projects/" + id + "/issues";
         IssueSearch[] issuesSearch = restTemplate.getForObject(uri, IssueSearch[].class);
         return Arrays.stream(issuesSearch).toList();

@@ -31,7 +31,7 @@ public class IssueSearch {
     @JsonProperty("author")
     private UserSearch author;
     @JsonProperty("assignee")
-    private Object assignee;
+    private UserSearch assignee;
     @JsonProperty("upvotes")
     private Integer upvotes;
     @JsonProperty("downvotes")
@@ -142,12 +142,12 @@ public class IssueSearch {
     }
 
     @JsonProperty("assignee")
-    public Object getAssignee() {
+    public UserSearch getAssignee() {
         return assignee;
     }
 
     @JsonProperty("assignee")
-    public void setAssignee(Object assignee) {
+    public void setAssignee(UserSearch assignee) {
         this.assignee = assignee;
     }
 

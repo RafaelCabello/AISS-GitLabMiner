@@ -16,6 +16,8 @@ public class IssueServiceTest {
 
     @Autowired
     IssueService service;
+
+    /*
     @Test
     @DisplayName("Get all issues")
     void findAllIssues() {
@@ -24,6 +26,19 @@ public class IssueServiceTest {
         issues.forEach(i-> {
             System.out.println(i);
             System.out.println("*************************************************************************************");
+        });
+    }
+
+     */
+
+    @Test
+    @DisplayName("Get all issues of project 4207231")
+    void findProjectCommits() {
+        List<IssueSearch> issues = service.findByProjectId("4207231");
+        assertTrue(!issues.isEmpty(), "No issues");
+        issues.forEach(c-> {
+            System.out.println(c);
+            System.out.println("***********************************************************************************");
         });
     }
 

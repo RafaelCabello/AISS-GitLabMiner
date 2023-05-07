@@ -15,10 +15,25 @@ class CommitServiceTest {
 
     @Autowired
     CommitService service;
+
+    /*
     @Test
     @DisplayName("Get all commits")
     void findAllCommits() {
         List<CommitSearch> commits = service.findAllCommits();
+        assertTrue(!commits.isEmpty(), "No commits");
+        commits.forEach(c-> {
+            System.out.println(c);
+            System.out.println("***********************************************************************************");
+        });
+    }
+
+     */
+
+    @Test
+    @DisplayName("Get all commits of project 4207231")
+    void findProjectCommits() {
+        List<CommitSearch> commits = service.findProjectCommits("4207231");
         assertTrue(!commits.isEmpty(), "No commits");
         commits.forEach(c-> {
             System.out.println(c);

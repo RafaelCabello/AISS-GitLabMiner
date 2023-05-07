@@ -1,5 +1,7 @@
 package aiss.gitlabminer.service;
 
+import aiss.gitlabminer.model.CommitSearch;
+import aiss.gitlabminer.model.Project;
 import aiss.gitlabminer.model.ProjectSearch;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,5 +26,19 @@ class ProjectServiceTest {
             System.out.println(p);
             System.out.println("************************************************************************************");
         });
+    }
+
+    @Test
+    @DisplayName("Get project with id = 45790011")
+    void findProject() {
+        ProjectSearch project = service.findOne(45790011);
+        System.out.println(project);
+    }
+
+    @Test
+    @DisplayName("Get complete project with id = 4207231")
+    void getProjectTest() {
+        Project project = service.getProject(4207231);
+        System.out.println(project);
     }
 }

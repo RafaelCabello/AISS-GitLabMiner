@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.*;
 public class UserSearch {
 
     @JsonProperty("id")
-    private Integer id;
+    private String id;
     @JsonProperty("username")
     private String username;
     @JsonProperty("name")
@@ -19,16 +19,14 @@ public class UserSearch {
     private String avatarUrl;
     @JsonProperty("web_url")
     private String webUrl;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new LinkedHashMap<String, Object>();
 
     @JsonProperty("id")
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
     @JsonProperty("id")
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -70,16 +68,6 @@ public class UserSearch {
     @JsonProperty("web_url")
     public void setWebUrl(String webUrl) {
         this.webUrl = webUrl;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
     @Override

@@ -15,6 +15,7 @@ public class CommitService {
 
     @Autowired
     RestTemplate restTemplate;
+    /*
     @Autowired
     ProjectService service;
 
@@ -26,6 +27,16 @@ public class CommitService {
             CommitSearch[] commitsSearch = restTemplate.getForObject(uri, CommitSearch[].class);
             commits.addAll(Arrays.stream(commitsSearch).toList());
         }
+        return commits;
+    }
+
+     */
+
+    public List<CommitSearch> findProjectCommits(String id) {
+        List<CommitSearch> commits = new ArrayList<>();
+        String uri = "https://gitlab.com/api/v4/projects/" + id + "/repository/commits";
+        CommitSearch[] commitsSearch = restTemplate.getForObject(uri, CommitSearch[].class);
+        commits.addAll(Arrays.stream(commitsSearch).toList());
         return commits;
     }
 }

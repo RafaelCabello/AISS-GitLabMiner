@@ -22,6 +22,8 @@ public class CommentService {
 
     @Autowired
     RestTemplate restTemplate;
+
+    /*
     @Autowired
     ProjectService projectService;
     @Autowired
@@ -37,7 +39,7 @@ public class CommentService {
         HttpEntity<CommentSearch[]> request = new HttpEntity<CommentSearch[]>(headers);
 
         for(ProjectSearch project: projects){
-            List<IssueSearch> issues = issueService.findByProjectId(project.getId());
+            List<IssueSearch> issues = issueService.findByProjectId(project.getId().toString());
             for(IssueSearch issue: issues){
                 String uri = "https://gitlab.com/api/v4/projects/" + project.getId() + "/issues/" + issue.getIid() + "/notes";
                 ResponseEntity<CommentSearch[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentSearch[].class);
@@ -46,6 +48,19 @@ public class CommentService {
             }
         }
         return comments;
+    }
+     */
+
+    public List<CommentSearch> findByProjectIssue(String projectId, String issueIid){
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer "+"glpat-NTBWo4LMEze4yssZBuzH");
+        HttpEntity<CommentSearch[]> request = new HttpEntity<CommentSearch[]>(headers);
+
+        String uri = "https://gitlab.com/api/v4/projects/" + projectId + "/issues/" + issueIid + "/notes";
+        ResponseEntity<CommentSearch[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentSearch[].class);
+
+        CommentSearch[] commentsSearch = response.getBody();
+        return Arrays.stream(commentsSearch).toList();
     }
 
 }
