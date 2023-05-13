@@ -40,7 +40,7 @@ public class ProjectController {
         List<Issue> issues = _project.getIssues().stream()
                 .filter(i -> LocalDateTime.parse(i.getUpdatedAt().substring(0,23)).isAfter(LocalDateTime.now().minusDays(sinceIssues))).toList();
         Project filtredProject = new Project(_project.getId(), _project.getName(), _project.getWebUrl(), commits, issues);
-        String uri = "http://localhost:8080/gitminer";
+        String uri = "http://localhost:8080/gitminer/projects";
         Project createdProject = template.postForObject(uri, filtredProject, Project.class);
         return createdProject;
 
