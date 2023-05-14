@@ -1,7 +1,6 @@
 package aiss.gitlabminer.service;
 
 import aiss.gitlabminer.model.*;
-import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

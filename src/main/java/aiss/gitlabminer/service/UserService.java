@@ -22,14 +22,11 @@ public class UserService {
     public List<UserSearch> findAllUsers() {
 
         HttpHeaders headers = new HttpHeaders();
-        //headers.add("x-api-key", "glpat-NTBWo4LMEze4yssZBuzH");
         headers.set("Authorization", "Bearer "+"glpat-NTBWo4LMEze4yssZBuzH");
-        //headers.add("Authorization", " " + "glpat-NTBWo4LMEze4yssZBuzH");
         String uri = "https://gitlab.com/api/v4/users";
         HttpEntity<UserSearch[]> request = new HttpEntity<UserSearch[]>(headers);
         ResponseEntity<UserSearch[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, UserSearch[].class);
         UserSearch[] users = response.getBody();
-        //UserSearch[] userSearch = restTemplate.getForObject(uri, UserSearch[].class);
         return Arrays.stream(users).toList();
     }
 

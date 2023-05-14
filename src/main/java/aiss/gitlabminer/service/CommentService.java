@@ -20,46 +20,7 @@ public class CommentService {
     @Autowired
     RestTemplate restTemplate;
 
-    /*
-    @Autowired
-    ProjectService projectService;
-    @Autowired
-    IssueService issueService;
-
-    public List<CommentSearch> findAllComments() {
-
-        List<CommentSearch> comments = new ArrayList<>();
-        List<ProjectSearch> projects = projectService.findAllProjects();
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer "+"glpat-NTBWo4LMEze4yssZBuzH");
-        HttpEntity<CommentSearch[]> request = new HttpEntity<CommentSearch[]>(headers);
-
-        for(ProjectSearch project: projects){
-            List<IssueSearch> issues = issueService.findByProjectId(project.getId().toString());
-            for(IssueSearch issue: issues){
-                String uri = "https://gitlab.com/api/v4/projects/" + project.getId() + "/issues/" + issue.getIid() + "/notes";
-                ResponseEntity<CommentSearch[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentSearch[].class);
-                CommentSearch[] commentsSearch = response.getBody();
-                comments.addAll(Arrays.stream(commentsSearch).toList());
-            }
-        }
-        return comments;
-    }
-     */
-
     public List<CommentSearch> findByProjectIssue(String projectId, String issueIid, Integer maxPages){
-        /*
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer "+"glpat-NTBWo4LMEze4yssZBuzH");
-        HttpEntity<CommentSearch[]> request = new HttpEntity<CommentSearch[]>(headers);
-
-        String uri = "https://gitlab.com/api/v4/projects/" + projectId + "/issues/" + issueIid + "/notes";
-        ResponseEntity<CommentSearch[]> response = restTemplate.exchange(uri, HttpMethod.GET, request, CommentSearch[].class);
-
-        CommentSearch[] commentsSearch = response.getBody();
-        return Arrays.stream(commentsSearch).toList();
-        */
         String uri = "https://gitlab.com/api/v4/projects/" + projectId + "/issues/" + issueIid + "/notes";
 
         String token = "glpat-NTBWo4LMEze4yssZBuzH";

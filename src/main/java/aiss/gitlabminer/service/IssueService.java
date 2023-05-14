@@ -21,29 +21,7 @@ public class IssueService {
     @Autowired
     RestTemplate restTemplate;
 
-    /*
-    @Autowired
-    ProjectService service;
-
-    public List<IssueSearch> findAllIssues() {
-        List<IssueSearch> issues = new ArrayList<>();
-        List<ProjectSearch> projects = service.findAllProjects();
-        for(ProjectSearch project : projects){
-            String uri = "https://gitlab.com/api/v4/projects/" + project.getId() + "/issues";
-            IssueSearch[] issuesSearch = restTemplate.getForObject(uri, IssueSearch[].class);
-            issues.addAll(Arrays.stream(issuesSearch).toList());
-        }
-        return issues;
-    }
-
-     */
-
     public List<IssueSearch> findByProjectId(String id, Integer maxPages){
-        /*
-        String uri = "https://gitlab.com/api/v4/projects/" + id + "/issues";
-        IssueSearch[] issuesSearch = restTemplate.getForObject(uri, IssueSearch[].class);
-        return Arrays.stream(issuesSearch).toList();
-        */
         String uri = "https://gitlab.com/api/v4/projects/" + id + "/issues";
 
         String token = "glpat-NTBWo4LMEze4yssZBuzH";
